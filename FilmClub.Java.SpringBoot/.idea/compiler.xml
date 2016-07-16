@@ -19,8 +19,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="FilmClub.Java.SpringBoot_main" target="1.8" />
-      <module name="FilmClub.Java.SpringBoot_test" target="1.8" />
+      <module name="DataService_main" target="1.5" />
+      <module name="DataService_test" target="1.5" />
+      <module name="FilmClub.Java.SpringBoot_main" target="1.5" />
+      <module name="FilmClub.Java.SpringBoot_test" target="1.5" />
+      <module name="Web_main" target="1.8" />
+      <module name="Web_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
