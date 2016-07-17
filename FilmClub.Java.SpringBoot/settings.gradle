@@ -1,4 +1,4 @@
 rootProject.name = 'FilmClub.Java.SpringBoot'
-include 'Web'
 include 'DataService'
+include 'Web'
 

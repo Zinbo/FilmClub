@@ -1,4 +1,8 @@
 package com.zinbo.shared;
 
-public class AggregateRoot extends Entity {
+import javax.persistence.Id;
+
+@javax.persistence.Entity
+public abstract class AggregateRoot extends Entity {
+
 }

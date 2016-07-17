@@ -1,7 +1,22 @@
 package com.zinbo.shared;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@javax.persistence.Entity
 public abstract class Entity {
-    private long id;
+
+    protected long id;
+
+    @Id
+    @GeneratedValue
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
