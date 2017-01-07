@@ -1,0 +1,4 @@
+1.) Going to have SPA application
+2.) Will split CSS into separate files
+3.) Going to go with gulp, browserify, babel, browser-sync for now.
+

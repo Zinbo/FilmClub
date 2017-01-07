@@ -7,6 +7,8 @@ var _angular2 = _interopRequireDefault(_angular);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var a = 5;
+
 },{"angular":3}],2:[function(require,module,exports){
 /**
  * @license AngularJS v1.6.1
