@@ -1,0 +1,5 @@
+What is commonJS?
+
+What is AMD?
+"browserify allows packaging node modules for browsers. browserify vs node's require is actually AMD vs CommonJS."
+
