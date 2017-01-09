@@ -1,31 +1,54 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
+var gulp        = require('gulp');
+var gutil       = require('gulp-util');
+var source      = require('vinyl-source-stream');
+var babelify    = require('babelify');
+var watchify    = require('watchify');
+var exorcist    = require('exorcist');
+var browserify  = require('browserify');
 var browserSync = require('browser-sync').create();
 
-var ENTRY_FILE = "app/index.html";
-var OUTPUT_DIR = "./dist";
+// Watchify args contains necessary cache options to achieve fast incremental bundles.
+// See watchify readme for details. Adding debug true for source-map generation.
+watchify.args.debug = true;
+// Input file.
+var bundler = watchify(browserify('./app/index.js', watchify.args));
 
+// Babel transform
+bundler.transform(babelify.configure({
+    sourceMapRelative: 'app'
+}));
 
-gulp.task('watch', ['browserSync', 'sass'], function (){
-  gulp.watch('app/**/*.scss', ['sass']); 
-  gulp.watch('app/*.html', browserSync.reload); 
-  gulp.watch('app/**/*.js', browserSync.reload); 
-})
+// On updates recompile
+bundler.on('update', bundle);
 
-gulp.task('browserSync', function() {
-  browserSync.init({
-    server: {
-      baseDir: 'app'
-    },
-  })
-})
+function bundle() {
 
-gulp.task('sass', function() {
-  return gulp.src('app/**/*.scss') // Gets all files ending with .scss in app/scss
-    .pipe(sass())
-    .pipe(gulp.dest('app/css'))
-    .pipe(browserSync.reload({
-      stream: true
-    }))
+    gutil.log('Compiling JS...');
+
+    return bundler.bundle()
+        .on('error', function (err) {
+            gutil.log(err.message);
+            browserSync.notify("Browserify Error!");
+            this.emit("end");
+        })
+        .pipe(exorcist('app/dist/bundle.js.map'))
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest('./app/dist'))
+        .pipe(browserSync.stream({once: true}));
+}
+
+/**
+ * Gulp task alias
+ */
+gulp.task('bundle', function () {
+    return bundle();
 });
 
+/**
+ * First bundle, then serve from the ./app directory
+ */
+gulp.task('default', ['bundle'], function () {
+    browserSync.init({
+        server: "./app"
+    });
+});

@@ -10,6 +10,7 @@
     "babelify": "^7.3.0",
     "browser-sync": "^2.18.6",
     "browserify": "^13.3.0",
+    "exorcist": "^0.4.0",
     "gulp": "^3.9.1",
     "gulp-notify": "^2.2.0",
     "gulp-sass": "^3.0.0",
@@ -18,6 +19,7 @@
     "watchify": "^3.8.0"
   },
   "scripts": {
+    "start": "gulp",
     "build2": "browserify index.js -o bundle.js -t [ babelify --presets [ es2015 ] ]"
   }
 }

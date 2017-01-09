@@ -1,4 +1,6 @@
 1.) Going to have SPA application
 2.) Will split CSS into separate files
-3.) Going to go with gulp, browserify, babel, browser-sync for now.
+3.) Going to go with gulp, browserify, babel, browser-sync, sass for now.
+	how to get all of these to work together?
 
+When should source maps show and when not?
