@@ -1,0 +1,42 @@
+FilmClub
+----------------
+
+An application that allows people to add movies to a backlog and for other users to vote for their favourite movie. The application will show the movie which is currently to be watched.
+
+Features:
+- users can add a movie from the list
+- users can delete a movie from the list
+- users must login with facebook
+- Users can view the list
+- users can vote for movies on the list
+- the list will show in winning order
+- there will be one active movie at a time
+- when an active movie is selected it will be removed from the list
+- an admin user can either select the highest voted movie or manually pick one from the list
+- an admin user can undo their current choice and add the previous movie back as the active
+- an admin user can set no active movie
+- users should be able to only delete their own movies
+- users shouldn't be allowed to add the same movie twice
+- movie data will be pulled from imdb and will use a typeahead
+- a movie can only be added if exists in imdb
+- users shouldn't be allowed to vote on their own movie
+
+Authentication:
+	- The user must be authorised through facebook
+	- the user will be authorised using OAuth
+	- there will be a hidden sign in page for admins
+
+Add Movie:
+	- User can enter a movie name and suggestions from imdb will appear
+	- User can optionally enter in a reason why they think this movie is good and people should watch it
+	- The movie will be saved with the users id against it
+	- The user must enter a valid imdb movie
+	- The user cannot add a movie which has the same imdb id as another movie
+
+	
+Delete movie:
+	- User can delete a movie from the list
+	- the user will be able to undo their deletion whilst they remain on the same page
+	- User can only delete movies which they themselves have added
+	- an admin user can delete any movie
+
