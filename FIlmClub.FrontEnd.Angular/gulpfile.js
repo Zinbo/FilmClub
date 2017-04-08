@@ -25,7 +25,6 @@ var imagemin = require('gulp-imagemin');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 // testing/mocha
-var mocha = require('gulp-mocha');
 var babelify = require('babelify');
 var browserify_shim = require('browserify-shim');
 var browserify_global_shim = require('browserify-global-shim');
@@ -110,8 +109,6 @@ var tasks = {
     // Browserify
     // --------------------------
     browserify: function() {
-
-
         var bundler = browserify('./app/index.js', {
                 debug: !production,
                 cache: {},
