@@ -1,13 +1,6 @@
 import angular from "angular";
+import navigationModule from './Navigation/navModule';
 
-const a = 5;
+const name = "app";
 
-const b = 7;
-
-const c = 10;
-
-const d = 20;
-
-const e = 20;
-
-const f = 20;
+angular.module(name, [navigationModule]);

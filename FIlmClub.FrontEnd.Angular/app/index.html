@@ -1,46 +1,157 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Film Club Learning Application">
-    <meta name="author" content="Shane Jennings">
-    <link href="shared/css/bootstrap.min.css" rel="stylesheet">
-  	<link href="shared/css/main.css" rel="stylesheet">
-	<link href="styles.css" rel="stylesheet"> 
-	<script src="bundle.js"></script>
-	
-	
-	
+<html lang="en">
 
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <title>Film Club</title>
-  </head>
-  <body>
 
-    <header id="header">
-      <div class="navbar navbar-inverse" role="banner">
-          <div class="container">
-              <div class="navbar-header">
-                  <a class="navbar-brand" href="index.html">
-                    <h1><img src="shared/images/logo.png" alt="logo"></h1>
-                  </a>
+    <!-- Bootstrap Core CSS -->
+    <link href="shared/css/bootstrap.min.css" rel="stylesheet">
 
-              </div>
-              <div class="collapse navbar-collapse">
-                  <ul class="nav navbar-nav navbar-right">
-                      <li class="active"><a href="ActiveMovie/ActiveMovie.html">Current Movie</a></li>
-                      <li><a href="NextMovie/NextMovie.html">Next Movie</a></li>
-                      <li><a href="SeenMovies/SeenMovies.html">Seen Movies</a></li>
-                  </ul>
-              </div>
-          </div>
-      </div>
+    <!-- Theme CSS -->
+    <link href="shared/css/freelancer.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="shared/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="bundle.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="app" id="page-top" class="index">
+    <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+
+    <navigation></navigation>
+
+    <!-- Header -->
+    <header>
+        <div class="container" id="maincontent" tabindex="-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="img/profile.png" alt="">
+                    <div class="intro-text">
+                        <h1 class="name">Film Club</h1>
+                        <hr class="star-light">
+                        <span class="skills">An application to experiment with different frameworks and languages</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
-  </body>
+
+    <!-- Portfolio Grid Section -->
+    <section id="currentMovie">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>What Are We Watching?</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <p>Placeholder</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="success" id="movies">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Movies</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <p>Placeholder</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="technologies" class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Server Side</h3>
+                        Dropwizard
+                        <i class="fa fa-star"></i> Spring Boot
+                        <i class="fa fa-star"></i> Play
+                        <i class="fa fa-star"></i> Node
+
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>Client Side</h3>
+                        Angular 1.6
+                        <i class="fa fa-star"></i> Angular 2
+                        <i class="fa fa-star"></i> Angular 4?
+                        <i class="fa fa-star"></i> React
+                        <i class="fa fa-star"></i> Aurelia
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>UI</h3>
+                        Bootstrap
+                        <i class="fa fa-star"></i> Material Design
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-inline">
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Google Plus</span><i class="fa fa-fw fa-google-plus"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Dribble</span><i class="fa fa-fw fa-dribbble"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+</body>
+
 </html>
