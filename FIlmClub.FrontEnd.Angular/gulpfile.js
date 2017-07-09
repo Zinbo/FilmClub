@@ -4,7 +4,6 @@ var gutil = require('gulp-util');
 var del = require('del');
 var uglify = require('gulp-uglify');
 var gulpif = require('gulp-if');
-var exec = require('child_process').exec;
 var notify = require('gulp-notify');
 var buffer = require('vinyl-buffer');
 var argv = require('yargs').argv;
@@ -22,12 +21,12 @@ var source = require('vinyl-source-stream');
 // image optimization
 var imagemin = require('gulp-imagemin');
 // linting
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
+// var jshint = require('gulp-jshint');
+// var stylish = require('jshint-stylish');
+var eslint = require('gulp-eslint');
 // testing/mocha
 var babelify = require('babelify');
 var browserify_shim = require('browserify-shim');
-var browserify_global_shim = require('browserify-global-shim');
 var Server = require('karma').Server;
 // gulp build --production
 var production = !!argv.production;
@@ -39,8 +38,8 @@ var watch = argv._.length ? argv._[0] === 'watch' : true;
 // ----------------------------
 // Error notification methods
 // ----------------------------
-var handleError = function(task) {
-    return function(err) {
+var handleError = function (task) {
+    return function (err) {
         notify.onError({
             message: task + ' failed, check the logs..',
             sound: false
@@ -56,13 +55,13 @@ var tasks = {
     // --------------------------
     // Delete build folder
     // --------------------------
-    clean: function() {
+    clean: function () {
         del.sync(['build/']);
     },
     // --------------------------
     // Copy static assets
     // --------------------------
-    assets: function() {
+    assets: function () {
         return gulp.src('./app/shared/**/*')
             .pipe(gulp.dest('build/shared/'));
     },
@@ -70,14 +69,14 @@ var tasks = {
     // HTML
     // --------------------------
     // html templates (when using the connect server)
-    templates: function() {
+    templates: function () {
         gulp.src('./app/**/*.html')
             .pipe(gulp.dest('build/'));
     },
     // --------------------------
     // SASS (libsass)
     // --------------------------
-    sass: function() {
+    sass: function () {
         return gulp.src('./app/**/*.scss')
             // sourcemaps + sass + error handling
             .pipe(gulpif(!production, sourcemaps.init()))
@@ -108,14 +107,14 @@ var tasks = {
     // --------------------------
     // Browserify
     // --------------------------
-    browserify: function() {
+    browserify: function () {
         var bundler = browserify('./app/index.js', {
-                debug: !production,
-                cache: {},
-                shim: {
-                    jquery: 'global:$'
-                }
-            })
+            debug: !production,
+            cache: {},
+            shim: {
+                jquery: 'global:$'
+            }
+        })
             .transform(babelify)
             .transform(browserify_shim);
 
@@ -125,7 +124,7 @@ var tasks = {
         if (watch) {
             bundler = watchify(bundler);
         }
-        var rebundle = function() {
+        var rebundle = function () {
             return bundler.bundle()
                 .on('error', handleError('Browserify'))
                 .pipe(source('bundle.js'))
@@ -139,21 +138,20 @@ var tasks = {
     // --------------------------
     // linting
     // --------------------------
-    lintjs: function() {
+    lintjs: function () {
         return gulp.src([
-                'gulpfile.js',
-                './app/index.js',
-                './app/**/*.js'
-            ]).pipe(jshint())
-            .pipe(jshint.reporter(stylish))
-            .on('error', function() {
-                handleError("lintjs");
-            });
+            'gulpfile.js',
+            './app/index.js',
+            './app/**/*.js'
+        ]).pipe(eslint())
+            .pipe(eslint.format())
+            .pipe(eslint.failAfterError());
+
     },
     // --------------------------
     // Optimize asset images
     // --------------------------
-    optimize: function() {
+    optimize: function () {
         return gulp.src('./app/assets/**/*.{gif,jpg,png,svg}')
             .pipe(imagemin({
                 progressive: true,
@@ -166,7 +164,7 @@ var tasks = {
     // --------------------------
     // Testing with karma + jasmine
     // --------------------------
-    test: function(done) {
+    test: function (done) {
         new Server({
             configFile: __dirname + '/karma.conf.js',
             singleRun: true
@@ -176,7 +174,7 @@ var tasks = {
 
 };
 
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
     browserSync({
         server: {
             baseDir: "./build"
@@ -185,13 +183,13 @@ gulp.task('browser-sync', function() {
     });
 });
 
-gulp.task('reload-sass', ['sass'], function() {
+gulp.task('reload-sass', ['sass'], function () {
     browserSync.reload();
 });
-gulp.task('reload-js', ['browserify'], function() {
+gulp.task('reload-js', ['browserify'], function () {
     browserSync.reload();
 });
-gulp.task('reload-templates', ['templates'], function() {
+gulp.task('reload-templates', ['templates'], function () {
     browserSync.reload();
 });
 
@@ -213,7 +211,7 @@ gulp.task('test', tasks.test);
 // --------------------------
 // DEV/WATCH TASK
 // --------------------------
-gulp.task('watch', ['assets', 'templates', 'sass', 'browserify', 'browser-sync', 'test'], function() {
+gulp.task('watch', ['assets', 'templates', 'sass', 'browserify', 'browser-sync', 'test'], function () {
 
     // --------------------------
     // watch:sass
