@@ -1,0 +1,1 @@
+api: java -jar FilmClub.Java.Dropwizard/target/filmclub.java.dropwizard-1.0-SNAPSHOT.jar server FilmClub.Java.Dropwizard/config.yaml
