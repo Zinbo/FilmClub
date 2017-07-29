@@ -1,1 +1,1 @@
-api: java  $JAVA_OPTS -Ddw.http.port=$PORT -Ddw.http.adminPort=$PORT -jar target/filmclub.java.dropwizard-1.0-SNAPSHOT.jar server config.yaml
+api: java  $JAVA_OPTS -Ddw.server.applicationConnectors[0].port=8090 -jar target/filmclub.java.dropwizard-1.0-SNAPSHOT.jar server config.yaml
