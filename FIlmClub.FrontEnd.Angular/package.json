@@ -3,6 +3,8 @@
         "angular": "^1.6.1",
         "babelify": "^7.3.0",
         "bootstrap": "^3.3.7",
+        "express": "^4.15.3",
+        "gulp-eslint": "^4.0.0",
         "jquery": "^3.2.1",
         "jquery-easing": "0.0.1",
         "watchify": "^3.8.0"
@@ -34,7 +36,7 @@
         "jshint-stylish": "^2.2.1",
         "karma": "^1.6.0",
         "karma-browserify": "^5.1.1",
-         "karma-jasmine": "^1.1.0",
+        "karma-jasmine": "^1.1.0",
         "karma-phantomjs-launcher": "^1.0.4",
         "vinyl-buffer": "^1.0.0",
         "vinyl-source-stream": "^1.1.0",
@@ -48,7 +50,7 @@
         "jQuery": "global:$"
     },
     "scripts": {
-        "start": "gulp",
-        "build2": "browserify index.js -o bundle.js -t [ babelify --presets [ es2015 ] ]"
+        "start": "node server",
+        "postinstall": "gulp build"
     }
 }
