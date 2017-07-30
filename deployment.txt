@@ -13,10 +13,14 @@ Commands for new feature:
 - git commit -m "message add [branch ch<storyNumber>]"
 - git push
 
+When to push to heroku:
+- When a feature is done merge back into develop and push to heroku, make sure it's deployed.
+
 FilmClub.FrontEnd.Angular
 ===========================
 - We have a procfile which does npm start, as defined in the package.json file. We also have an npm task "postinstall" which heroku runs after build to do the gulp build.
 
 
 FilmClub.Java.Dropwizard
+===========================
 - We have a procfile which runs the dropwizard jar.
