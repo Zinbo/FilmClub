@@ -1,4 +1,4 @@
-package filmclub.dropwizard;
+package filmclub.application;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,15 +20,15 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("filmclub.dropwizard")
-@EnableJpaRepositories("filmclub.dropwizard")
+@ComponentScan("filmclub")
+@EnableJpaRepositories("filmclub")
 @EnableTransactionManagement
 class SpringConfiguration {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter vendorAdapter) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("filmclub.dropwizard");
+        em.setPackagesToScan("filmclub");
         em.setJpaVendorAdapter(vendorAdapter);
         return em;
     }

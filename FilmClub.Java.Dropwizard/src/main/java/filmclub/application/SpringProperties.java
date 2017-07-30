@@ -1,4 +1,4 @@
-package filmclub.dropwizard;
+package filmclub.application;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 

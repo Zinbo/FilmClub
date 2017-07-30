@@ -1,4 +1,4 @@
-package filmclub.dropwizard.springbundle;
+package filmclub.application.springbundle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dropwizard.Configuration;
@@ -24,7 +24,7 @@ import java.util.Properties;
  * {@link org.springframework.beans.factory.config.PlaceholderConfigurerSupport} subclass that resolves ${...} placeholders
  * against the Dropwizard {@link Configuration}..
  */
-public class ConfigurationPlaceholderConfigurer implements BeanFactoryPostProcessor {
+class ConfigurationPlaceholderConfigurer implements BeanFactoryPostProcessor {
 
     /** Logger available to subclasses */
     protected final Logger LOG = LoggerFactory.getLogger(ConfigurationPlaceholderConfigurer.class);
@@ -38,26 +38,26 @@ public class ConfigurationPlaceholderConfigurer implements BeanFactoryPostProces
     // ~ Copied from {@link PlaceholderConfigurerSupport} ----------------------------------------------------------------------
 
     /** Default placeholder prefix: {@value} */
-    public static final String DEFAULT_PLACEHOLDER_PREFIX = "${";
+    private static final String DEFAULT_PLACEHOLDER_PREFIX = "${";
 
     /** Default placeholder suffix: {@value} */
-    public static final String DEFAULT_PLACEHOLDER_SUFFIX = "}";
+    private static final String DEFAULT_PLACEHOLDER_SUFFIX = "}";
 
     /** Default value separator: {@value} */
-    public static final String DEFAULT_VALUE_SEPARATOR = ":";
+    private static final String DEFAULT_VALUE_SEPARATOR = ":";
 
     /** Defaults to {@value #DEFAULT_PLACEHOLDER_PREFIX} */
-    protected String placeholderPrefix = DEFAULT_PLACEHOLDER_PREFIX;
+    private String placeholderPrefix = DEFAULT_PLACEHOLDER_PREFIX;
 
     /** Defaults to {@value #DEFAULT_PLACEHOLDER_SUFFIX} */
-    protected String placeholderSuffix = DEFAULT_PLACEHOLDER_SUFFIX;
+    private String placeholderSuffix = DEFAULT_PLACEHOLDER_SUFFIX;
 
     /** Defaults to {@value #DEFAULT_VALUE_SEPARATOR} */
-    protected String valueSeparator = DEFAULT_VALUE_SEPARATOR;
+    private String valueSeparator = DEFAULT_VALUE_SEPARATOR;
 
-    protected boolean ignoreUnresolvablePlaceholders = false;
+    private boolean ignoreUnresolvablePlaceholders = false;
 
-    protected String nullValue;
+    private String nullValue;
 
     /**
      * {@linkplain #processProperties process} properties against the given bean factory.
@@ -78,32 +78,18 @@ public class ConfigurationPlaceholderConfigurer implements BeanFactoryPostProces
         }
     }
 
-    /**
-     * {@linkplain #loadProperties load} properties against the Configuration.
-     *
-     * @throws BeanInitializationException if any properties cannot be loaded
-     */
     private void loadProperties(Properties props) throws BeansException, IOException {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         objectMapper.writeValue(stream, configuration);
         propertiesPersister.load(props, new ByteArrayInputStream(stream.toByteArray()));
     }
 
-    /**
-     * @param beanFactory
-     * @param props
-     * @throws BeansException
-     */
-    protected void processProperties(ConfigurableListableBeanFactory beanFactory, Properties props) throws BeansException {
+    private void processProperties(ConfigurableListableBeanFactory beanFactory, Properties props) throws BeansException {
         StringValueResolver valueResolver = new PlaceholderResolvingStringValueResolver(props);
         doProcessProperties(beanFactory, valueResolver);
     }
 
 
-    /**
-     * Set the prefix that a placeholder string starts with.
-     * The default is {@value #DEFAULT_PLACEHOLDER_PREFIX}.
-     */
     public void setPlaceholderPrefix(String placeholderPrefix) {
         this.placeholderPrefix = placeholderPrefix;
     }
@@ -153,11 +139,11 @@ public class ConfigurationPlaceholderConfigurer implements BeanFactoryPostProces
     /**
      * Set the configuration to load properties.
      */
-    public void setConfiguration(Configuration configuration) {
+    void setConfiguration(Configuration configuration) {
         this.configuration = configuration;
     }
 
-    public void setObjectMapper(final ObjectMapper objectMapper) {
+    void setObjectMapper(final ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
         this.propertiesPersister = new JsonPropertiesPersister(objectMapper);
     }
@@ -170,7 +156,7 @@ public class ConfigurationPlaceholderConfigurer implements BeanFactoryPostProces
         private final PropertyPlaceholderHelper helper;
         private final PropertyPlaceholderHelper.PlaceholderResolver resolver;
 
-        public PlaceholderResolvingStringValueResolver(Properties props) {
+        PlaceholderResolvingStringValueResolver(Properties props) {
             this.helper = new PropertyPlaceholderHelper(
                     placeholderPrefix, placeholderSuffix, valueSeparator, ignoreUnresolvablePlaceholders);
             this.resolver = new PropertyPlaceholderConfigurerResolver(props);
@@ -196,7 +182,7 @@ public class ConfigurationPlaceholderConfigurer implements BeanFactoryPostProces
 
     // ~ Copied and adapted from {@link PlaceholderConfigurerSupport} -----------------------------------------------------------
 
-    protected void doProcessProperties(ConfigurableListableBeanFactory beanFactoryToProcess,
+    private void doProcessProperties(ConfigurableListableBeanFactory beanFactoryToProcess,
                                        StringValueResolver valueResolver) {
         BeanDefinitionVisitor visitor = new BeanDefinitionVisitor(valueResolver);
         String[] beanNames = beanFactoryToProcess.getBeanDefinitionNames();

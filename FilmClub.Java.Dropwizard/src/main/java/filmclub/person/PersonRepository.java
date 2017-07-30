@@ -1,4 +1,4 @@
-package filmclub.dropwizard.person;
+package filmclub.person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

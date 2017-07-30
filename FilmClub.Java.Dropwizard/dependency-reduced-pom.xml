@@ -19,7 +19,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>filmclub.dropwizard.HelloWorldApplication</mainClass>
+                  <mainClass>filmclub.application.DropwizardApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

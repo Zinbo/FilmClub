@@ -1,4 +1,4 @@
-package filmclub.dropwizard.springbundle;
+package filmclub.application.springbundle;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,10 +22,10 @@ import java.util.Map;
 
 public class SpringBundle<T extends Configuration> implements ConfiguredBundle<T> {
 
-    public static final String CONFIGURATION_BEAN_NAME = "dw";
-    public static final String ENVIRONMENT_BEAN_NAME = "dwEnv";
-    public static final String PLACEHOLDER_BEAN_NAME = "dwPlaceholder";
-    public static final String OBJECT_MAPPER_BEAN_NAME = "dwObjectMapper";
+    private static final String CONFIGURATION_BEAN_NAME = "dw";
+    private static final String ENVIRONMENT_BEAN_NAME = "dwEnv";
+    private static final String PLACEHOLDER_BEAN_NAME = "dwPlaceholder";
+    private static final String OBJECT_MAPPER_BEAN_NAME = "dwObjectMapper";
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringBundle.class);
 
@@ -53,7 +53,7 @@ public class SpringBundle<T extends Configuration> implements ConfiguredBundle<T
      * @param registerEnvironment   register Dropwizard environment as a Spring Bean.
      * @param registerPlaceholder   resolve Dropwizard configuration as properties.
      */
-    public SpringBundle(ConfigurableApplicationContext context, boolean registerConfiguration, boolean registerEnvironment, boolean registerPlaceholder) {
+    private SpringBundle(ConfigurableApplicationContext context, boolean registerConfiguration, boolean registerEnvironment, boolean registerPlaceholder) {
         if (registerConfiguration || registerEnvironment  || registerPlaceholder) {
             Preconditions.checkArgument(!context.isActive(), "Context must be not active in order to register configuration, environment or placeholder");
         }
@@ -74,9 +74,7 @@ public class SpringBundle<T extends Configuration> implements ConfiguredBundle<T
      */
     public SpringBundle(ConfigurableApplicationContext context, boolean registerConfiguration, boolean registerEnvironment, ConfigurationPlaceholderConfigurer placeholderConfigurer) {
         Preconditions.checkArgument(placeholderConfigurer != null, "PlaceholderConfigurer is required");
-        if (registerConfiguration || registerEnvironment  || placeholderConfigurer != null) {
-            Preconditions.checkArgument(!context.isActive(), "Context must be not active in order to register configuration, environment or placeholder");
-        }
+        Preconditions.checkArgument(!context.isActive(), "Context must be not active in order to register configuration, environment or placeholder");
         this.context = context;
         this.registerConfiguration = registerConfiguration;
         this.registerEnvironment = registerEnvironment;

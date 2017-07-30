@@ -1,17 +1,16 @@
-package filmclub.dropwizard;
+package filmclub.application;
 
-import filmclub.dropwizard.springbundle.SpringBundle;
+import filmclub.application.springbundle.SpringBundle;
 import io.dropwizard.Application;
-import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
+public class DropwizardApplication extends Application<DropwizardConfiguration> {
     public static void main(String[] args) throws Exception {
-        new HelloWorldApplication().run(args);
+        new DropwizardApplication().run(args);
     }
 
     @Override
@@ -20,12 +19,12 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     }
 
     @Override
-    public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
+    public void initialize(Bootstrap<DropwizardConfiguration> bootstrap) {
         bootstrap.addBundle(new SpringBundle<>(applicationContext()));
     }
 
     @Override
-    public void run(HelloWorldConfiguration configuration,
+    public void run(DropwizardConfiguration configuration,
                     Environment environment) {
     }
 

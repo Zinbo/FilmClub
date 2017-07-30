@@ -1,13 +1,13 @@
-package filmclub.dropwizard.springbundle;
+package filmclub.application.springbundle;
 
 import io.dropwizard.lifecycle.Managed;
 import org.springframework.context.ConfigurableApplicationContext;
 
 
-public class SpringContextManaged implements Managed {
+class SpringContextManaged implements Managed {
     private final ConfigurableApplicationContext context;
 
-    public SpringContextManaged(final ConfigurableApplicationContext context) {
+    SpringContextManaged(final ConfigurableApplicationContext context) {
         this.context = context;
     }
 

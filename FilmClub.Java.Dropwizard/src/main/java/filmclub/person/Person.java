@@ -1,4 +1,4 @@
-package filmclub.dropwizard.person;
+package filmclub.person;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

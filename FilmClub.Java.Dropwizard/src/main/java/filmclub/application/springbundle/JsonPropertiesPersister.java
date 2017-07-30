@@ -1,4 +1,4 @@
-package filmclub.dropwizard.springbundle;
+package filmclub.application.springbundle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.util.DefaultPropertiesPersister;
@@ -17,7 +17,7 @@ import java.util.Properties;
  *
  * @author Dave Syer
  */
-public class JsonPropertiesPersister extends DefaultPropertiesPersister {
+class JsonPropertiesPersister extends DefaultPropertiesPersister {
 
     private ObjectMapper mapper;
 
@@ -25,7 +25,7 @@ public class JsonPropertiesPersister extends DefaultPropertiesPersister {
         this(new ObjectMapper());
     }
 
-    public JsonPropertiesPersister(ObjectMapper mapper) {
+    JsonPropertiesPersister(ObjectMapper mapper) {
         this.mapper = mapper;
     }
 
@@ -34,18 +34,9 @@ public class JsonPropertiesPersister extends DefaultPropertiesPersister {
         load(props, new InputStreamReader(is));
     }
 
-    /**
-     * We want to traverse map representing Json object and each time we find String:String pair we want to
-     * save it as Property. As we are going deeper into map we generate compound key as path-like String
-     *
-     * @param props
-     * @param reader
-     * @throws IOException
-     * @see org.springframework.util.PropertiesPersister#load(java.util.Properties, java.io.Reader)
-     */
     @Override
     public void load(Properties props, Reader reader) throws IOException {
-        Map map = mapper.readValue(reader, Map.class);
+        Map<String, Object> map = mapper.readValue(reader, Map.class);
         // now we can populate supplied props
         assignProperties(props, map, null);
     }

@@ -1,10 +1,9 @@
-package filmclub.dropwizard;
+package filmclub.application;
 
 import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.NotEmpty;
 
-class HelloWorldConfiguration extends Configuration {
+class DropwizardConfiguration extends Configuration {
 
     private SpringProperties springProperties;
 
