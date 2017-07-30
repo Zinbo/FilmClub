@@ -1,0 +1,22 @@
+Each app is published to heroku
+- each part represents a heroku app
+- each part has it's own procfile, which tells heroku how to deploy
+
+Commands for heroku:
+- create app in heroku: heroku create <app name>
+- associate a new remote with the heroku name: git remote add origin https://git.heroku.com/<appname>.git
+- push changes to heroku master branch: git subtree push --prefix <folder name> <app name> master
+
+Commands for new feature:
+- git flow feature start <feature name>
+- git add .
+- git commit -m "message add [branch ch<storyNumber>]"
+- git push
+
+FilmClub.FrontEnd.Angular
+===========================
+- We have a procfile which does npm start, as defined in the package.json file. We also have an npm task "postinstall" which heroku runs after build to do the gulp build.
+
+
+FilmClub.Java.Dropwizard
+- We have a procfile which runs the dropwizard jar.
