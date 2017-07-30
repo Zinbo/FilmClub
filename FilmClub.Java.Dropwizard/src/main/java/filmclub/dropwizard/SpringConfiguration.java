@@ -46,7 +46,7 @@ class SpringConfiguration {
         @Bean
         public DataSource dataSource(){
             DriverManagerDataSource dataSource = new DriverManagerDataSource();
-            dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            dataSource.setDriverClassName("org.postgresql.Driver");
             dataSource.setUrl(System.getenv("JDBC_DATABASE_URL"));
             dataSource.setUsername(System.getenv("JDBC_DATABASE_USERNAME"));
             dataSource.setPassword(System.getenv("JDBC_DATABASE_PASSWORD"));
