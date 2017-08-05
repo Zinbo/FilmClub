@@ -1,28 +1,19 @@
 package filmclub.movie;
 
-import filmclub.TestConfiguration;
-import io.dropwizard.testing.junit.ResourceTestRule;
+import filmclub.EndToEndHelper;
+import io.dropwizard.client.JerseyClientBuilder;
 import org.assertj.core.api.Assertions;
-import org.junit.ClassRule;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
-@ContextConfiguration(classes = TestConfiguration.class)
-public class MovieResourceIntegrationTest {
-
-    @Autowired
-    private static MovieRepository movieRepository;
+public class MovieResourceIntegrationTest extends EndToEndHelper {
 
     //https://www.themoviedb.org/documentation/api
-
-    @ClassRule
-    public static final ResourceTestRule movieResource = ResourceTestRule.builder()
-            .addResource(new MovieResource(movieRepository))
-            .build();
+    private Client client = ClientBuilder.newClient();
 
     @Test
     public void get_withNoParams_returns200() {
@@ -30,7 +21,10 @@ public class MovieResourceIntegrationTest {
         int expected = 200;
 
         //act
-        Response response = movieResource.target("/movies").request().get();
+        Response response = client.target(
+                String.format("http://localhost:%d/movies", RULE.getLocalPort()))
+                .request()
+                .get();
         int actual = response.getStatus();
 
         //assert
@@ -44,7 +38,9 @@ public class MovieResourceIntegrationTest {
         Movie movie = new Movie();
 
         //act
-        Response response = movieResource.target("/movies").request().post(Entity.json(movie));
+        Response response = client.target(
+                String.format("http://localhost:%d/movies", RULE.getLocalPort()))
+                .request().post(Entity.json(movie));
         int actual = response.getStatus();
 
         //assert
@@ -58,11 +54,36 @@ public class MovieResourceIntegrationTest {
         expected.setImageLink("blah");
 
         //act
-        Response response = movieResource.target("/movies").request().post(Entity.json(expected));
+        Response response = client.target(
+                String.format("http://localhost:%d/movies", RULE.getLocalPort()))
+                .request().post(Entity.json(expected));
         Movie actual = response.readEntity(Movie.class);
 
         //assert
         Assertions.assertThat(expected.getImageLink()).isEqualTo(actual.getImageLink());
         Assertions.assertThat(actual.getId()).isNotBlank();
+    }
+
+    @Test
+    public void post_withTheSameMovie_returnsMovieWithId() {
+        //arrange
+        int expected = 422;
+        Movie movie1 = new Movie();
+        movie1.setThemoviedbId(1);
+
+        Movie movie2 = new Movie();
+        movie2.setThemoviedbId(2);
+
+        //act
+        client.target(
+                String.format("http://localhost:%d/movies", RULE.getLocalPort()))
+                .request().post(Entity.json(movie1));
+        Response response = client.target(
+                String.format("http://localhost:%d/movies", RULE.getLocalPort()))
+                .request().post(Entity.json(movie2));
+        int actual = response.getStatus();
+
+        //assert
+        Assertions.assertThat(actual).isEqualTo(expected);
     }
 }

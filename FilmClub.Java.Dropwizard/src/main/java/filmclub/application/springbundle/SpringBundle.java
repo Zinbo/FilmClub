@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.ext.Provider;
@@ -33,6 +34,10 @@ public class SpringBundle<T extends Configuration> implements ConfiguredBundle<T
     private ConfigurationPlaceholderConfigurer placeholderConfigurer;
     private boolean registerConfiguration;
     private boolean registerEnvironment;
+
+    public SpringBundle() {
+        this(null, false, false, false);
+    }
 
     /**
      * Creates a new SpringBundle to automatically initialize Dropwizard {@link Environment}
@@ -84,6 +89,11 @@ public class SpringBundle<T extends Configuration> implements ConfiguredBundle<T
     @Override
     public void run(T configuration, Environment environment) throws Exception {
         // Register Dropwizard Configuration as a Bean Spring.
+        Class contextClass = Class.forName(System.getProperty("spring.applicationclass"));
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(contextClass);
+
         if (registerConfiguration) registerConfiguration(configuration, context);
 
         // Register the Dropwizard environment

@@ -5,3 +5,4 @@ server:
 
 spring:
   profile: local
+  applicationContextClass: filmclub.application.SpringConfiguration

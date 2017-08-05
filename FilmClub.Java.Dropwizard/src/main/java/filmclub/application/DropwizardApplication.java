@@ -21,8 +21,8 @@ public class DropwizardApplication extends Application<DropwizardConfiguration> 
     }
 
     @Override
-    public void initialize(Bootstrap<DropwizardConfiguration> bootstrap) {
-        bootstrap.addBundle(new SpringBundle<>(applicationContext()));
+    public void initialize(Bootstrap<DropwizardConfiguration> bootstrap)  {
+        bootstrap.addBundle(new SpringBundle<>());
         bootstrap.addBundle(
                 new SwaggerUIBundle(env -> {
                     return new AppSwaggerConfiguration(env) {
@@ -48,12 +48,6 @@ public class DropwizardApplication extends Application<DropwizardConfiguration> 
     @Override
     public void run(DropwizardConfiguration configuration,
                     Environment environment) {
-    }
-
-    private ConfigurableApplicationContext applicationContext() throws BeansException {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(SpringConfiguration.class);
-        return context;
     }
 
 }

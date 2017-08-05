@@ -7,4 +7,4 @@ server:
       port: 7001
 
 spring:
-  profile: local
+  applicationContextClass: filmclub.TestConfiguration

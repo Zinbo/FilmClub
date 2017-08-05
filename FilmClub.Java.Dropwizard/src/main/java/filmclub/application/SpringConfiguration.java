@@ -25,10 +25,11 @@ import java.util.Properties;
 @EnableTransactionManagement
 class SpringConfiguration {
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter vendorAdapter) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter vendorAdapter, Properties additionalProperties) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
         em.setPackagesToScan("filmclub");
+        em.setJpaProperties(additionalProperties);
         em.setJpaVendorAdapter(vendorAdapter);
         return em;
     }
@@ -95,6 +96,8 @@ class SpringConfiguration {
         public Properties additionalProperties() {
             Properties properties = new Properties();
             properties.setProperty("hibernate.hbm2ddl.auto", "update");
+            //https://stackoverflow.com/questions/10075081/hibernate-slow-to-acquire-postgres-connection
+            properties.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");
             return properties;
         }
     }
