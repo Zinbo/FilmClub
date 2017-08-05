@@ -3,7 +3,7 @@ package filmclub.application;
 import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-class DropwizardConfiguration extends Configuration {
+public class DropwizardConfiguration extends Configuration {
 
     private SpringProperties springProperties;
 
