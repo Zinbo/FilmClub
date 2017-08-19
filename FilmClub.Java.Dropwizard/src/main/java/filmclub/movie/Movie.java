@@ -1,6 +1,10 @@
 package filmclub.movie;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Strings;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 //We need @Table because when hibernate tries to create these tables, it will try to create a table called "Movie", however postgres is not case
 //sensitive, so it will create a table called "movie". Next time, hibernate will look for a table called "Movie", not find it, so will try to create
@@ -13,12 +17,15 @@ public class Movie {
     private String id;
 
     @Column
+    @NotNull
     private String name;
 
     @Column
-    private int themoviedbId;
+    @NotNull
+    private int externalId;
 
     @Column
+    @NotNull
     private String imageLink;
 
     public String getId() {
@@ -37,13 +44,6 @@ public class Movie {
         this.name = name;
     }
 
-    public int getThemoviedbId() {
-        return themoviedbId;
-    }
-
-    public void setThemoviedbId(int themoviedbId) {
-        this.themoviedbId = themoviedbId;
-    }
 
     public String getImageLink() {
         return imageLink;
@@ -51,5 +51,20 @@ public class Movie {
 
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
+    }
+
+    public int getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(int externalId) {
+        this.externalId = externalId;
+    }
+
+    @JsonIgnore
+    public boolean isValid() {
+        return externalId > 0 &&
+                !Strings.isNullOrEmpty(name) &&
+                !Strings.isNullOrEmpty(imageLink);
     }
 }

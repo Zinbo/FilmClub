@@ -91,6 +91,18 @@
             <artifactId>dropwizard-swagger</artifactId>
             <version>3.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.java.dev.webdav</groupId>
+            <artifactId>webdav-jaxrs</artifactId>
+            <version>1.2.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
 
 
         <!-- spring and hibernate -->
@@ -120,12 +132,6 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4-1200-jdbc4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.196</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- testing -->

@@ -1,10 +1,8 @@
 package filmclub.movie;
 
 import filmclub.EndToEndHelper;
-import io.dropwizard.client.JerseyClientBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -34,8 +32,11 @@ public class MovieResourceIntegrationTest extends EndToEndHelper {
     @Test
     public void post_withValidMovie_returns201() {
         //arrange
-        int expected = 200;
+        int expected = 201;
         Movie movie = new Movie();
+        movie.setName("Movie 1");
+        movie.setExternalId(1);
+        movie.setImageLink("a");
 
         //act
         Response response = client.target(
@@ -52,8 +53,11 @@ public class MovieResourceIntegrationTest extends EndToEndHelper {
         //arrange
         Movie expected = new Movie();
         expected.setImageLink("blah");
+        expected.setExternalId(2);
+        expected.setName("movie1");
 
         //act
+
         Response response = client.target(
                 String.format("http://localhost:%d/movies", RULE.getLocalPort()))
                 .request().post(Entity.json(expected));
@@ -69,10 +73,14 @@ public class MovieResourceIntegrationTest extends EndToEndHelper {
         //arrange
         int expected = 422;
         Movie movie1 = new Movie();
-        movie1.setThemoviedbId(1);
+        movie1.setExternalId(3);
+        movie1.setName("movie2");
+        movie1.setImageLink("blah");
 
         Movie movie2 = new Movie();
-        movie2.setThemoviedbId(2);
+        movie2.setExternalId(3);
+        movie2.setName("movie2");
+        movie2.setImageLink("blah");
 
         //act
         client.target(
@@ -85,5 +93,14 @@ public class MovieResourceIntegrationTest extends EndToEndHelper {
 
         //assert
         Assertions.assertThat(actual).isEqualTo(expected);
+    }
+    
+    @Test
+    public void post_withMissingParameters_returns400() {
+        //arrange
+    
+        //act
+        
+        //assert
     }
 }

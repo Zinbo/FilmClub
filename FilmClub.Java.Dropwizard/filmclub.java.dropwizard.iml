@@ -101,6 +101,7 @@
     <orderEntry type="library" name="Maven: net.logstash.logback:logstash-logback-encoder:4.5.1" level="project" />
     <orderEntry type="library" name="Maven: com.esotericsoftware:reflectasm:1.10.0" level="project" />
     <orderEntry type="library" name="Maven: org.ow2.asm:asm:4.2" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.webdav:webdav-jaxrs:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.10.RELEASE" level="project" />
