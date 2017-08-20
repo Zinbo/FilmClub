@@ -24,30 +24,31 @@ public class DropwizardApplication extends Application<DropwizardConfiguration> 
     public void initialize(Bootstrap<DropwizardConfiguration> bootstrap)  {
         bootstrap.addBundle(new SpringBundle<>());
         bootstrap.addBundle(
-                new SwaggerUIBundle(env -> {
-                    return new AppSwaggerConfiguration(env) {
-                        {
-                            setTitle("My API");
-                            setDescription("My API");
-                            setSchemes(new String[]{"http"});
+            new SwaggerUIBundle(env -> {
+                return new AppSwaggerConfiguration(env) {
+                    {
+                        setTitle("My API");
+                        setDescription("My API");
+                        setSchemes(new String[]{"http"});
 
-                            // The package name to look for swagger resources under
-                            setResourcePackage("filmclub.movie");
+                        // The package name to look for swagger resources under
+                        setResourcePackage("filmclub.movie");
 
-                            setLicense("Apache 2.0");
-                            setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
+                        setLicense("Apache 2.0");
+                        setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
 
-                            setContact("shanepeterjennings@gmail.com");
+                        setContact("shanepeterjennings@gmail.com");
 
-                            setVersion("1.0");
-                        }
-                    };
-                }));
+                        setVersion("1.0");
+                    }
+                };
+            }));
     }
 
     @Override
     public void run(DropwizardConfiguration configuration,
                     Environment environment) {
+        environment.jersey().register(new RestExceptionsMapper());
     }
 
 }

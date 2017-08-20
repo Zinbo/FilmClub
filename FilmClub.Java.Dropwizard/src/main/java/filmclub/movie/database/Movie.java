@@ -1,7 +1,7 @@
-package filmclub.movie;
+package filmclub.movie.database;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Strings;
+import filmclub.application.HandledException;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,17 +16,26 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    @Column
+    @Column(nullable = false)
     @NotNull
     private String name;
 
-    @Column
+    @Column(nullable = false)
     @NotNull
     private int externalId;
 
-    @Column
+    @Column(nullable = false)
     @NotNull
     private String imageLink;
+
+    public Movie(){}
+
+    private Movie(Builder builder) {
+        setName(builder.name);
+        setExternalId(builder.externalId);
+        setImageLink(builder.imageLink);
+        if(!valid()) throw new HandledException("Movie must have external id, name, external id, and image link");
+    }
 
     public String getId() {
         return id;
@@ -61,10 +70,39 @@ public class Movie {
         this.externalId = externalId;
     }
 
-    @JsonIgnore
-    public boolean isValid() {
+
+    public boolean valid() {
         return externalId > 0 &&
                 !Strings.isNullOrEmpty(name) &&
                 !Strings.isNullOrEmpty(imageLink);
+    }
+
+    public static final class Builder {
+        private String name;
+        private int externalId;
+        private String imageLink;
+
+        public Builder() {
+        }
+
+
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
+        public Builder externalId(int val) {
+            externalId = val;
+            return this;
+        }
+
+        public Builder imageLink(String val) {
+            imageLink = val;
+            return this;
+        }
+
+        public Movie build() {
+            return new Movie(this);
+        }
     }
 }

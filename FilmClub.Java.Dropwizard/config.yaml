@@ -2,3 +2,7 @@ server:
   applicationConnectors:
     - type: http
       port: 8080
+  registerDefaultExceptionMappers: false
+
+theMovieDbProxy:
+  getMovieByIdUrl: https://api.themoviedb.org/3/movie/%d?api_key=c99917ae489bca2e3ad805c0ad92546b

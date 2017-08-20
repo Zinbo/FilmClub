@@ -7,12 +7,13 @@ import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Rule;
 
 import javax.ws.rs.client.Client;
 
 public abstract class EndToEndHelper {
 
-    @ClassRule
-    public static final DropwizardAppRule<DropwizardConfiguration> RULE =
+    @Rule
+    public final DropwizardAppRule<DropwizardConfiguration> RULE =
             new DropwizardAppRule<>(DropwizardApplication.class, ResourceHelpers.resourceFilePath("test.yaml"));
 }
