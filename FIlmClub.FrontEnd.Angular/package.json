@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "angular": "^1.6.1",
+        "angular": "^1.6.6",
         "angular-mocks": "^1.6.1",
         "autoprefixer": "^6.6.1",
         "babel-preset-env": "^1.1.4",
@@ -35,6 +35,7 @@
         "karma-browserify": "^5.1.1",
         "karma-jasmine": "^1.1.0",
         "karma-phantomjs-launcher": "^1.0.4",
+        "selenium-standalone": "^6.7.0",
         "vinyl-buffer": "^1.0.0",
         "vinyl-source-stream": "^1.1.0",
         "watchify": "^3.8.0",
@@ -49,5 +50,9 @@
     "scripts": {
         "start": "node server",
         "postinstall": "gulp build"
+    },
+    "devDependencies": {
+        "eslint-plugin-jasmine": "^2.8.4",
+        "eslint-plugin-protractor": "^1.40.0"
     }
 }

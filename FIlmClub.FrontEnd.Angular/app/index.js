@@ -3,4 +3,10 @@ import navigationModule from './Navigation/navModule';
 
 const name = "app";
 
-angular.module(name, [navigationModule]);
+console.log("In Module")
+
+angular.module(name, [navigationModule])
+    .controller('GreetingController', ['$scope', function ($scope) {
+        $scope.greeting = 'Hola!';
+        console.log("hola!");
+    }])

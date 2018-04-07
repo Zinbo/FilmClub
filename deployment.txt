@@ -24,3 +24,6 @@ FilmClub.FrontEnd.Angular
 FilmClub.Java.Dropwizard
 ===========================
 - We have a procfile which runs the dropwizard jar.
+
+
+https://app.clubhouse.io/zinbo/stories/workspace/2/everything
