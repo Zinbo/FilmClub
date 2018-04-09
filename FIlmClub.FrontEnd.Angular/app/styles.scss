@@ -2,3 +2,12 @@
 .testing {
   width: percentage(5/7);
 }
+
+#invalid-input {
+  border-left-color: salmon;
+}
+
+input.submitted.ng-invalid
+{
+  border:1px solid #f00;
+}

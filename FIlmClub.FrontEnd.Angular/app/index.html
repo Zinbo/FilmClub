@@ -12,6 +12,7 @@
     <title>Film Club</title>
 
     <!-- Bootstrap Core CSS -->
+    <link href="styles.css" rel="stylesheet">
     <link href="shared/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
@@ -38,7 +39,7 @@
 
 </head>
 
-<body ng-app="app" ng-controller="GreetingController" id="page-top" class="index">
+<body ng-app="app" id="page-top" class="index">
     <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
 
     <navigation></navigation>
@@ -92,21 +93,7 @@
         </div>
     </section>
 
-    <section id="addMovie">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Add Movie</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <p>Placeholder</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <add-movie></add-movie>
 
     <footer id="technologies" class="text-center">
         <div class="footer-above">

@@ -1,0 +1,20 @@
+<section id="addMovie">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Add Movie</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+                <form name="addMovieForm">
+                    <label for="imdb">Imdb link:</label>
+                    <input id="imdb" ng-model="imdbLink" type="text" ng-pattern="/^\d+$/" required ng-class="{submitted:addMovieForm.submitted}"
+                    />
+                    <button ng-click="$ctrl.addMovie()" class="btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
