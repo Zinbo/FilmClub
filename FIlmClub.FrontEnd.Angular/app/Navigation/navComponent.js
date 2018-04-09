@@ -1,7 +1,7 @@
 import navController from './navController';
 
 export const navComponent = {
-    templateUrl: './Navigation/nav.html',
+    templateUrl: './navigation/nav.html',
     controller: navController
 };
 

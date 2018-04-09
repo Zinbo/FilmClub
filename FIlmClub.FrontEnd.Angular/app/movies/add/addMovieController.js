@@ -1,23 +1,25 @@
 export default class AddMovieController {
-    constructor($scope, addMovieService) {
+    constructor($scope, addMovieService, $rootScope) {
         $scope.addMovie = this.addMovie;
         this.$scope = $scope;
         this.addMovieService = addMovieService;
+        this.$rootScope = $rootScope;
     }
 
     addMovie() {
-        if (this.$scope.addMovieForm.$invalid) this.$scope.addMovieForm.submitted=true;
+        const $scope = this.$scope;
+        if ($scope.addMovieForm.$invalid) $scope.addMovieForm.submitted=true;
 
-        const imdbLink = this.$scope.imdbLink;
+        const imdbLink = $scope.imdbLink;
         if(imdbLink) this.addMovieService.addMovie(imdbLink)
         .then((response) => {
-            console.log("success!");
+            this.$rootScope.$broadcast('alert', {status: 'success', message: 'Movie Added!'});
         })
         .catch((response) => {
-            console.log("Failure...");
+            this.$rootScope.$broadcast('alert', {status: 'danger', message: `Server responded with ${response.data.message}`});
         });
     }    
 }
 
-AddMovieController.$inject = ['$scope', 'addMovieService'];
+AddMovieController.$inject = ['$scope', 'addMovieService', '$rootScope'];
 

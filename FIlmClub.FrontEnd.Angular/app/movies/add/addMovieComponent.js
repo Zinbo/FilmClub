@@ -1,7 +1,7 @@
 import addMovieController from './addMovieController';
 
 export const addMovieComponent = {
-    templateUrl: './AddMovie/add.html',
+    templateUrl: './movies/add/add.html',
     controller: addMovieController
 };
 
