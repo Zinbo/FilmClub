@@ -1,7 +1,7 @@
 import angular from "angular";
 import addMovieComponent from './addMovieComponent';
 import addMovieService from './addMovieService';
-import getBackEndServiceUrl from '../Common/getBackEndServiceUrl';
+import getBackEndServiceUrl from '../../common/getBackEndServiceUrl';
 
 export default name = "addMovieModule";
 
