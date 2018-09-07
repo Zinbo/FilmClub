@@ -23,7 +23,7 @@ import java.util.Properties;
 @ComponentScan("filmclub")
 @EnableJpaRepositories("filmclub")
 @EnableTransactionManagement
-class SpringConfiguration {
+public class SpringConfiguration {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter vendorAdapter, Properties additionalProperties) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();

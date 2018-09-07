@@ -12,27 +12,10 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
-public class MovieResourceIntegrationTest extends EndToEndHelper {
+public class MoviesOOPComponentTest extends EndToEndHelper {
 
     //https://www.themoviedb.org/documentation/api
     private Client client = ClientBuilder.newClient();
-
-    @Test
-    @Transactional
-    public void get_withNoParams_returns200() {
-        //arrange
-        int expected = 200;
-
-        //act
-        Response response = client.target(
-                String.format("http://localhost:%d/movies", RULE.getLocalPort()))
-                .request()
-                .get();
-        int actual = response.getStatus();
-
-        //assert
-        Assertions.assertThat(actual).isEqualTo(expected);
-    }
     
     @Test
     @Transactional
@@ -116,11 +99,50 @@ public class MovieResourceIntegrationTest extends EndToEndHelper {
     
     @Test
     @Transactional
-    public void post_withMissingParameters_returns400() {
-        //arrange
-    
-        //act
-        
-        //assert
+    public void get_withSearchParam_returns200() {
+        // arrange
+        int expected = 200;
+        String name = "search";
+
+        // act
+        Response response = client.target(
+                String.format("http://localhost:%d/movies?name=%s", RULE.getLocalPort(), name))
+                .request().get();
+        int actual = response.getStatus();
+
+        // assert
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @Transactional
+    public void get_withNoSearchParam_returns200() {
+        // arrange
+        int expected = 200;
+
+        // act
+        Response response = client.target(
+                String.format("http://localhost:%d/movies", RULE.getLocalPort()))
+                .request().get();
+        int actual = response.getStatus();
+
+        // assert
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @Transactional
+    public void get_withEmptySearchParam_returns400() {
+        // arrange
+        int expected = 400;
+
+        // act
+        Response response = client.target(
+                String.format("http://localhost:%d/movies?name=", RULE.getLocalPort()))
+                .request().get();
+        int actual = response.getStatus();
+
+        // assert
+        Assertions.assertThat(actual).isEqualTo(expected);
     }
 }

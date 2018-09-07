@@ -8,6 +8,7 @@ import filmclub.movie.function.ExternalIdAlreadyMappedToMovie;
 import filmclub.movie.function.GetMovieDetailsByExternalId;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,11 +36,17 @@ public class MovieResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(
-            value = "gets all movies",
+            value = "gets all movies, can pass search param to filter",
             response = Movie.class,
             responseContainer = "List")
-    public Response get(){
-        return Response.ok(new ArrayList<>()).build();
+    public Response get(@QueryParam("name") String searchTerm){
+        if(StringUtils.isWhitespace(searchTerm)) return Response
+                .status(400)
+                .entity(new ExceptionResponse(400,"Search param cannot be empty"))
+                .build();
+
+        if(searchTerm == null) return Response.ok(movieRepository.findAll()).build();
+        return Response.ok(movieRepository.moviesWhichContainName(searchTerm)).build();
     }
 
     @POST
@@ -55,6 +62,4 @@ public class MovieResource {
         Movie movie = getMovieDetailsByExternalId.query(movieDto.getExternalId());
         return Response.status(201).entity(movieRepository.save(movie)).build();
     }
-
-
 }
