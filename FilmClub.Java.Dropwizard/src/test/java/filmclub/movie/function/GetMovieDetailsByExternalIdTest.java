@@ -2,7 +2,7 @@ package filmclub.movie.function;
 
 import filmclub.application.HandledException;
 import filmclub.movie.database.Movie;
-import filmclub.movie.proxy.themoviedb.TheMovieDbMovieDto;
+import filmclub.movie.proxy.themoviedb.MovieDto;
 import filmclub.movie.proxy.themoviedb.TheMovieDbProxy;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -25,7 +25,7 @@ public class GetMovieDetailsByExternalIdTest {
     public void query_withValidExternalId_returnsTranslatedMovie() {
         //arrange
         int externalId = 1;
-        TheMovieDbMovieDto dto = new TheMovieDbMovieDto();
+        MovieDto dto = new MovieDto();
         dto.setId(1);
         Movie expected = new Movie();
         Mockito.when(theMovieDbProxy.getMovieById(externalId)).thenReturn(Optional.of(dto));

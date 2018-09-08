@@ -1,7 +1,7 @@
 package filmclub.movie.function;
 
 import filmclub.movie.database.Movie;
-import filmclub.movie.proxy.themoviedb.TheMovieDbMovieDto;
+import filmclub.movie.proxy.themoviedb.MovieDto;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class TranslateTheMovieDbDtoToMovieTest {
                 .imageLink(path)
                 .build();
 
-        TheMovieDbMovieDto dto = new TheMovieDbMovieDto();
+        MovieDto dto = new MovieDto();
         dto.setId(id);
         dto.setPosterPath(path);
         dto.setTitle(name);

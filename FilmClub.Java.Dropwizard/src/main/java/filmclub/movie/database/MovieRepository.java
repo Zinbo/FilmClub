@@ -13,6 +13,6 @@ public interface MovieRepository extends JpaRepository<Movie, String> {
     boolean movieExistsWithExternalId(@Param("externalId") int externalId);
 
     @Query("select m from Movie m " +
-            "where m.name LIKE CONCAT('%',:name,'%')")
+            "where LOWER(m.name) LIKE CONCAT('%',LOWER(:name),'%')")
     List<Movie> moviesWhichContainName(@Param("name") String name);
 }

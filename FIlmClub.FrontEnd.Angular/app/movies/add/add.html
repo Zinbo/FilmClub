@@ -7,14 +7,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-4">
-                <form name="addMovieForm">
-                    <label for="imdb">Imdb link:</label>
-                    <input id="imdb" ng-model="imdbLink" type="text" ng-pattern="/^\d+$/" required ng-class="{submitted:addMovieForm.submitted}"
-                    />
+            <form name="addMovieForm">
+                <div class="col-lg-11">
+                    <input type="text" ng-model="selectedMovie" ng-model-options="{'debounce': 500}" placeholder="Search for a movie..." 
+                        uib-typeahead="movie as movie.title for movie in $ctrl.getMovieResultsByName($viewValue)" typeahead-loading="loadingLocations" 
+                        typeahead-no-results="noResults" class="form-control" ng-minlength="3">
+                    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                    <div ng-show="noResults">
+                        <i class="glyphicon glyphicon-remove"></i> No Results Found
+                    </div>
+                </div>
+                <div class="col-lg-1">
                     <button ng-click="$ctrl.addMovie()" class="btn">Submit</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </section>

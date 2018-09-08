@@ -2,7 +2,7 @@ package filmclub.movie.function;
 
 import filmclub.application.HandledException;
 import filmclub.movie.database.Movie;
-import filmclub.movie.proxy.themoviedb.TheMovieDbMovieDto;
+import filmclub.movie.proxy.themoviedb.MovieDto;
 import filmclub.movie.proxy.themoviedb.TheMovieDbProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class GetMovieDetailsByExternalId {
     }
 
     public Movie query(int externalId) {
-        Optional<TheMovieDbMovieDto> dto = theMovieDbProxy.getMovieById(externalId);
+        Optional<MovieDto> dto = theMovieDbProxy.getMovieById(externalId);
         dto.orElseThrow(() ->
                 new HandledException("external ID does not map to a movie in The Movie DB"));
         return translateTheMovieDbDtoToMovie.query(dto.get());

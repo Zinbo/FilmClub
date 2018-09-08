@@ -1,16 +1,16 @@
 package filmclub.movie.function;
 
 import filmclub.movie.database.Movie;
-import filmclub.movie.proxy.themoviedb.TheMovieDbMovieDto;
+import filmclub.movie.proxy.themoviedb.MovieDto;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TranslateTheMovieDbDtoToMovie {
-    public Movie query(TheMovieDbMovieDto theMovieDbMovieDto) {
+    public Movie query(MovieDto movieDto) {
         return new Movie.Builder()
-                .externalId(theMovieDbMovieDto.getId())
-                .imageLink(theMovieDbMovieDto.getPosterPath())
-                .name(theMovieDbMovieDto.getTitle())
+                .externalId(movieDto.getId())
+                .imageLink(movieDto.getPosterPath())
+                .name(movieDto.getTitle())
                 .build();
     }
 }
