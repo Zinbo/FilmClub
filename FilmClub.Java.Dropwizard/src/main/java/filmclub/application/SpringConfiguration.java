@@ -66,7 +66,9 @@ public class SpringConfiguration {
         @Bean
         public Properties additionalProperties() {
             Properties properties = new Properties();
-            properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+            properties.setProperty("hibernate.hbm2ddl.auto", "update");
+            //https://stackoverflow.com/questions/10075081/hibernate-slow-to-acquire-postgres-connection
+            properties.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");
             return properties;
         }
     }
