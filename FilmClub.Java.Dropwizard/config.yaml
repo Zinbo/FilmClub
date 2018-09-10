@@ -5,7 +5,7 @@ server:
   registerDefaultExceptionMappers: false
 
 spring:
-  profile: local
+  profile: default
   applicationContextClass: filmclub.application.SpringConfiguration
 
 theMovieDbProxy:
