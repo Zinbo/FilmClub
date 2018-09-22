@@ -1,14 +1,12 @@
 import angular from "angular";
-import addMovieComponent from './addMovieComponent';
+import viewMoviesComponent from './viewMoviesComponent';
 import movieService from '../shared/movieService';
-import theMovieDbService from './theMovieDbService';
 import getBackEndServiceUrl from '../../common/getBackEndServiceUrl';
 import uibootstrap from 'angular-ui-bootstrap';
 
-export default name = "addMovieModule";
+export default name = "viewMoviesModule";
 
 angular.module(name, [uibootstrap])
     .service('movieService', movieService)
-    .service('theMovieDbService', theMovieDbService)
     .service('getBackEndServiceUrl', getBackEndServiceUrl)
-    .component("addMovie", addMovieComponent);
+    .component("viewMovies", viewMoviesComponent);

@@ -8,6 +8,11 @@ export default class MovieService {
         if(!movieDbId) return;
         return this.$http.post(`${this.getBackEndServiceUrl.query()}/movies`, {externalId: movieDbId });
     }
+
+    getMovies() {
+        return this.$http.get(`${this.getBackEndServiceUrl.query()}/movies`)
+            .then(response => response.data);
+    }
 }
 
 MovieService.$inject = ['$http', 'getBackEndServiceUrl']

@@ -1,0 +1,16 @@
+<section class="success" id="movies">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Movies</h2>
+                <hr class="star-light">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                    <p ng-if="movies && movies.length > 0" ng-repeat="movie in movies">{{movie.name}}</p>
+                    <p ng-if="!movies || movies.length === 0">No movies found, why not try adding one?</p>
+            </div>
+        </div>
+    </div>
+</section>
