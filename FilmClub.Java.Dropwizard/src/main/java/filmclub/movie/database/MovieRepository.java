@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface MovieRepository extends JpaRepository<Movie, String> {
+public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     @Query("select count(m) > 0 from Movie m " +
             "where m.externalId = :externalId")

@@ -1,6 +1,7 @@
 package filmclub.movie;
 
 import filmclub.EndToEndHelper;
+import filmclub.application.ExceptionResponse;
 import filmclub.movie.database.Movie;
 import filmclub.movie.dto.CreateMovieDto;
 import org.assertj.core.api.Assertions;
@@ -44,6 +45,7 @@ public class MoviesOOPComponentTest extends EndToEndHelper {
                 .imageLink("/oql1WCn0WNMGBA8xwZt5FWnAcfW.jpg")
                 .externalId(54335)
                 .name("Christy - A New Beginning")
+                .imdbId("")
                 .build();
         CreateMovieDto dto = new CreateMovieDto();
         dto.setExternalId(54335);
@@ -56,7 +58,7 @@ public class MoviesOOPComponentTest extends EndToEndHelper {
 
         //assert
         Assertions.assertThat(actual).isEqualToIgnoringGivenFields(expected, "id");
-        Assertions.assertThat(actual.getId()).isNotBlank();
+        Assertions.assertThat(actual.getId()).isGreaterThan(0);
     }
 
     @Test
@@ -141,6 +143,22 @@ public class MoviesOOPComponentTest extends EndToEndHelper {
         Response response = client.target(
                 String.format("http://localhost:%d/movies?name=", RULE.getLocalPort()))
                 .request().get();
+        int actual = response.getStatus();
+
+        // assert
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @Transactional
+    public void delete_withIdThatDoesntExist_returns404() {
+        // arrange
+        int expected = 404;
+
+        // act
+        Response response = client.target(
+                String.format("http://localhost:%d/movies/123", RULE.getLocalPort()))
+                .request().delete();
         int actual = response.getStatus();
 
         // assert

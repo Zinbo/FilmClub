@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
     @Column(nullable = false)
     @NotNull
@@ -28,6 +28,7 @@ public class Movie {
     @NotNull
     private String imageLink;
 
+    @Column
     private String imdbId;
 
     public Movie(){}
@@ -40,11 +41,11 @@ public class Movie {
         if(!valid()) throw new HandledException("Movie must have external id, name, external id, and image link");
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -74,7 +75,7 @@ public class Movie {
     }
 
 
-    public boolean valid() {
+    private boolean valid() {
         return externalId > 0 &&
                 !Strings.isNullOrEmpty(name) &&
                 !Strings.isNullOrEmpty(imageLink);

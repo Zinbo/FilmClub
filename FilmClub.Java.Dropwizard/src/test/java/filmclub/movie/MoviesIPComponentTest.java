@@ -114,4 +114,48 @@ public class MoviesIPComponentTest {
         // assert
         Assertions.assertThat(actual).isEqualToComparingFieldByFieldRecursively(expected);
     }
+
+    @Test
+    @Transactional
+    public void delete_withNoId_returnsBadRequest() {
+        // arrange
+        ExceptionResponse expected = new ExceptionResponse(400, "Id cannot be empty");
+
+        // act
+        Response response = movieResource.delete(null);
+        ExceptionResponse actual = (ExceptionResponse) response.getEntity();
+
+        // assert
+        Assertions.assertThat(actual).isEqualToComparingFieldByFieldRecursively(expected);
+    }
+
+    @Test
+    @Transactional
+    public void delete_withIdThatDoesntExist_returnsNotFound() {
+        // arrange
+        int expected = 404;
+
+        // act
+        Response response = movieResource.delete(123);
+        int actual = response.getStatus();
+
+        // assert
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @Transactional
+    public void delete_withIdThatExists_returnsOk() {
+        // arrange
+        int expected = 200;
+        Movie movie = movieRepository.save(new Movie.Builder().externalId(123).imageLink("link").name("name").imdbId("imdbId").build());
+        Integer id = movie.getId();
+
+        // act
+        Response response = movieResource.delete(id);
+        int actual = response.getStatus();
+
+        // assert
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
 }
