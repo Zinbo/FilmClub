@@ -13,12 +13,13 @@
                     <div ng-repeat="movie in moviesRow" class="col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-body">
+                                    <button type="button" class="close" ng-click="$ctrl.openDeleteModal(movie)"><span aria-hidden="true">&times;</span></button>
                                     <img ng-src="{{movie.imageLink}}" style="width:100%">
                                 </div>
                                 <div class="panel-footer">
                                     <div class="row">
                                         <div style="text-align: center;" class="col-md-12"> 
-                                            <a ng-if="movie.imdbId" ng-href="https://www.imdb.com/title/{{movie.imdbId}}/">{{movie.name}}</a>
+                                            <a target="_blank" ng-if="movie.imdbId" ng-href="https://www.imdb.com/title/{{movie.imdbId}}/">{{movie.name}}</a>
                                             <span ng-if="!movie.imdbId">{{movie.name}}</span>
                                         </div>
                                     </div>
