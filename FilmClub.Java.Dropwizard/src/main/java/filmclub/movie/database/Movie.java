@@ -28,12 +28,15 @@ public class Movie {
     @NotNull
     private String imageLink;
 
+    private String imdbId;
+
     public Movie(){}
 
     private Movie(Builder builder) {
         setName(builder.name);
         setExternalId(builder.externalId);
         setImageLink(builder.imageLink);
+        setImdbId(builder.imdbId);
         if(!valid()) throw new HandledException("Movie must have external id, name, external id, and image link");
     }
 
@@ -77,10 +80,19 @@ public class Movie {
                 !Strings.isNullOrEmpty(imageLink);
     }
 
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
     public static final class Builder {
         private String name;
         private int externalId;
         private String imageLink;
+        private String imdbId;
 
         public Builder() {
         }
@@ -98,6 +110,11 @@ public class Movie {
 
         public Builder imageLink(String val) {
             imageLink = val;
+            return this;
+        }
+
+        public Builder imdbId(String val) {
+            imdbId = val;
             return this;
         }
 

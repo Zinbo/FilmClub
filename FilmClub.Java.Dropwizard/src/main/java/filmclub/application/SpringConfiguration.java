@@ -90,6 +90,7 @@ public class SpringConfiguration {
         public JpaVendorAdapter jpaVendorAdapter() {
             HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
             vendorAdapter.setShowSql(true);
+            vendorAdapter.setGenerateDdl(true);
             vendorAdapter.setDatabase(Database.POSTGRESQL);
             return vendorAdapter;
         }

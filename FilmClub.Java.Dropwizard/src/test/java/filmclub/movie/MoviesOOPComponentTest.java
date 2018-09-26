@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 public class MoviesOOPComponentTest extends EndToEndHelper {
 
     //https://www.themoviedb.org/documentation/api
+    //https://developers.themoviedb.org/3
     private Client client = ClientBuilder.newClient();
     
     @Test

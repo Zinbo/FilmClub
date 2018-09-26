@@ -9,6 +9,8 @@ public class MovieDto {
     private String title;
     @JsonProperty(value = "poster_path")
     private String posterPath;
+    @JsonProperty(value = "imdb_id")
+    private String imdbId;
 
     public int getId() {
         return id;
@@ -32,5 +34,13 @@ public class MovieDto {
 
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 }

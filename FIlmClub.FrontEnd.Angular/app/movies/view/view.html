@@ -8,8 +8,35 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                    <p ng-if="movies && movies.length > 0" ng-repeat="movie in movies">{{movie.name}}</p>
-                    <p ng-if="!movies || movies.length === 0">No movies found, why not try adding one?</p>
+                <p ng-if="!moviesGroupedByRow || moviesGroupedByRow.length === 0">No movies found, why not try adding one?</p>
+                <div class="row" ng-if="moviesGroupedByRow && moviesGroupedByRow.length > 0" ng-repeat="moviesRow in moviesGroupedByRow">
+                    <div ng-repeat="movie in moviesRow" class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <img ng-src="{{movie.imageLink}}" style="width:100%">
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div style="text-align: center;" class="col-md-12"> 
+                                            <a ng-if="movie.imdbId" ng-href="https://www.imdb.com/title/{{movie.imdbId}}/">{{movie.name}}</a>
+                                            <span ng-if="!movie.imdbId">{{movie.name}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <i class="fa fa-thumbs-o-down fa-2x"></i>
+                                            <i class="pull-right fa fa-thumbs-o-up fa-2x"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-md-12">
+                                                <span>0</span>
+                                                <span class="pull-right">0</span>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                    </div>
             </div>
         </div>
     </div>

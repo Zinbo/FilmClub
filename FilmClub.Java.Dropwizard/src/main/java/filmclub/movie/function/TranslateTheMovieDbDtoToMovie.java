@@ -11,6 +11,7 @@ public class TranslateTheMovieDbDtoToMovie {
                 .externalId(movieDto.getId())
                 .imageLink(movieDto.getPosterPath())
                 .name(movieDto.getTitle())
+                .imdbId(movieDto.getImdbId())
                 .build();
     }
 }
