@@ -1,11 +1,15 @@
 export default class ViewMoviesController {
-    constructor($scope, movieService, $rootScope) {
+    constructor($scope, movieService, $rootScope, $uibModal) {
         $scope.getMovies = this.getMovies;
         this.$scope = $scope;
         this.movieService = movieService;
+        this.$uibModal = $uibModal;
         this.$rootScope = $rootScope;
         this.getMovies();
         this.baseImageUri = 'https://image.tmdb.org/t/p/w342';
+        $rootScope.$on('changeMovies', () => {
+            this.getMovies();
+        });
     }
 
     getMovies() {
@@ -35,7 +39,20 @@ export default class ViewMoviesController {
             this.$rootScope.$broadcast('alert', {status: 'danger', message: `Cannot get movies!`});
         });
     }
+
+    openDeleteModal(movie) {
+        if(!movie || !movie.id) return;
+        this.$uibModal.open({
+          animation: true,
+          component: 'deleteMovie',
+          resolve: {
+            movie: () => {
+              return movie;
+            }
+          }
+        });
+    };
 }
 
-ViewMoviesController.$inject = ['$scope', 'movieService', '$rootScope'];
+ViewMoviesController.$inject = ['$scope', 'movieService', '$rootScope', '$uibModal'];
 

@@ -29,6 +29,7 @@ export default class AddMovieController {
         if(selectedMovie.id) this.movieService.addMovie(selectedMovie.id)
             .then(() => {
                 this.$rootScope.$broadcast('alert', {status: 'success', message: 'Movie Added!'});
+                this.$rootScope.$broadcast('changeMovies');
             })
             .catch((response) => {
                 this.$rootScope.$broadcast('alert', {status: 'danger', message: `Server responded with ${response.data.message}`});

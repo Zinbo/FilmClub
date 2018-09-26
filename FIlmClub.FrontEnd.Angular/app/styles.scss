@@ -24,3 +24,11 @@ input.submitted.ng-invalid
 .panel{
   color: black
 }
+
+.delete-button {
+  color: lightcoral; 
+}
+
+.delete-button:hover {
+  color: red !important;
+}

@@ -13,6 +13,10 @@ export default class MovieService {
         return this.$http.get(`${this.getBackEndServiceUrl.query()}/movies`)
             .then(response => response.data);
     }
+
+    deleteMovie(id) {
+        return this.$http.delete(`${this.getBackEndServiceUrl.query()}/movies/${id}`);
+    }
 }
 
 MovieService.$inject = ['$http', 'getBackEndServiceUrl']
