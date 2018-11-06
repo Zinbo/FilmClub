@@ -25,14 +25,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <i class="fa fa-thumbs-o-down fa-2x"></i>
-                                            <i class="pull-right fa fa-thumbs-o-up fa-2x"></i>
+                                            <i ng-click="$ctrl.voteDown(movie)" ng-class="movie.alreadyDownVoted ? 'already-voted' : ''" class="vote-down fa fa-thumbs-o-down fa-2x"></i>
+                                            <i ng-click="$ctrl.voteUp(movie)" ng-class="movie.alreadyUpVoted ? 'already-voted' : ''" class="vote-up pull-right fa fa-thumbs-o-up fa-2x"></i>
                                         </div>
                                     </div>
                                     <div class="row">
-                                            <div class="col-md-12">
-                                                <span>0</span>
-                                                <span class="pull-right">0</span>
+                                            <div class="col-md-12 votes">
+                                                {{movie.votes}}
                                             </div>
                                         </div>
                                 </div>

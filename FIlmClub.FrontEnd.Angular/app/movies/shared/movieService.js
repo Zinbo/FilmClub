@@ -17,6 +17,10 @@ export default class MovieService {
     deleteMovie(id) {
         return this.$http.delete(`${this.getBackEndServiceUrl.query()}/movies/${id}`);
     }
+
+    vote(id, score) {
+        return this.$http.post(`${this.getBackEndServiceUrl.query()}/movies/${id}/vote`, {score});
+    }
 }
 
 MovieService.$inject = ['$http', 'getBackEndServiceUrl']

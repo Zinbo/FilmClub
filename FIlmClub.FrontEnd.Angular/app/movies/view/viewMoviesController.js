@@ -52,6 +52,39 @@ export default class ViewMoviesController {
           }
         });
     };
+
+    voteUp(movie) {
+        if(movie.alreadyUpVoted) return;
+        movie.alreadyUpVoted = true;
+        if(movie.alreadyDownVoted) {
+            movie.alreadyDownVoted = false;
+            // score needs to be two to remove the downvote
+            this.movieService.vote(movie.id, 2).then(() => {
+                movie.votes += 2;      
+            });
+        }
+        else {
+            this.movieService.vote(movie.id, 1).then(() => {
+                movie.votes += 1;        
+            });
+        }
+        
+    }
+
+    voteDown(movie) {
+        if(movie.alreadyDownVoted) return;
+        movie.alreadyDownVoted = true;
+        if(movie.alreadyUpVoted) {
+            movie.alreadyUpVoted = false;
+            // score needs to be -2 to remove the upvote
+            this.movieService.vote(movie.id, -2);
+            movie.votes -= 2;
+        }
+        else {
+            this.movieService.vote(movie.id, -1);
+            movie.votes -= 1;
+        }
+    }
 }
 
 ViewMoviesController.$inject = ['$scope', 'movieService', '$rootScope', '$uibModal'];
