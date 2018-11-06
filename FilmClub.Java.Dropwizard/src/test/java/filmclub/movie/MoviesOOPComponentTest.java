@@ -45,6 +45,7 @@ public class MoviesOOPComponentTest extends EndToEndHelper {
                 .imageLink("/oql1WCn0WNMGBA8xwZt5FWnAcfW.jpg")
                 .externalId(54335)
                 .name("Christy - A New Beginning")
+                .votes(0)
                 .imdbId("")
                 .build();
         CreateMovieDto dto = new CreateMovieDto();

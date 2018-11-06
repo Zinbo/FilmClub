@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Comparator;
+import java.util.List;
 
 @Component
 @Path("/movies")
@@ -45,7 +47,11 @@ public class MovieResource {
                 .entity(new ExceptionResponse(400,"Search param cannot be empty"))
                 .build();
 
-        if(searchTerm == null) return Response.ok(movieRepository.findAll()).build();
+        if(searchTerm == null) {
+            List<Movie> allMovies = movieRepository.findAll();
+            allMovies.sort(Comparator.comparing(Movie::getName));
+            return Response.ok(allMovies).build();
+        }
         return Response.ok(movieRepository.moviesWhichContainName(searchTerm)).build();
     }
 
@@ -72,6 +78,19 @@ public class MovieResource {
         Movie movie = movieRepository.findOne(id);
         if(movie == null) return Response.status(Response.Status.NOT_FOUND).build();
         movieRepository.delete(movie);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/{id}/vote")
+    public Response vote(@PathParam("id") Integer id, VoteDto voteDto) {
+        if(id == null || voteDto == null) return Response.status(Response.Status.BAD_REQUEST)
+                .entity(new ExceptionResponse(400, "Id and dto cannot be empty"))
+                .build();
+        Movie movie = movieRepository.findOne(id);
+        if(movie == null) return Response.status(Response.Status.NOT_FOUND).build();
+        movie.setVotes(movie.getVotes() + voteDto.getScore());
+        movieRepository.save(movie);
         return Response.ok().build();
     }
 }

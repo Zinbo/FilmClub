@@ -148,7 +148,7 @@ public class MoviesIPComponentTest {
     public void delete_withIdThatExists_returnsOk() {
         // arrange
         int expected = 200;
-        Movie movie = movieRepository.save(new Movie.Builder().externalId(123).imageLink("link").name("name").imdbId("imdbId").build());
+        Movie movie = movieRepository.save(new Movie.Builder().externalId(123).imageLink("link").votes(1).name("name").imdbId("imdbId").build());
         Integer id = movie.getId();
 
         // act
@@ -158,4 +158,47 @@ public class MoviesIPComponentTest {
         // assert
         Assertions.assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @Transactional
+    public void vote_withoutId_returnsBadRequest() {
+        // arrange
+        int expected = 400;
+
+        // act
+        Response response = movieResource.vote(null, new VoteDto());
+        int actual = response.getStatus();
+
+        // assert
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @Transactional
+    public void vote_withoutDto_returnsBadRequest() {
+        // arrange
+        int expected = 400;
+
+        // act
+        Response response = movieResource.vote(123, null);
+        int actual = response.getStatus();
+
+        // assert
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @Transactional
+    public void vote_withIdThatDoesntExist_returnsNotFound() {
+        // arrange
+        int expected = 404;
+
+        // act
+        Response response = movieResource.vote(123, new VoteDto());
+        int actual = response.getStatus();
+
+        // assert
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
 }

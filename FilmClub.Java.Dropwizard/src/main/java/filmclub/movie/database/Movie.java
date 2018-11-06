@@ -31,6 +31,9 @@ public class Movie {
     @Column
     private String imdbId;
 
+    @Column
+    private Integer votes;
+
     public Movie(){}
 
     private Movie(Builder builder) {
@@ -38,6 +41,7 @@ public class Movie {
         setExternalId(builder.externalId);
         setImageLink(builder.imageLink);
         setImdbId(builder.imdbId);
+        setVotes(builder.votes);
         if(!valid()) throw new HandledException("Movie must have external id, name, external id, and image link");
     }
 
@@ -89,7 +93,16 @@ public class Movie {
         this.imdbId = imdbId;
     }
 
+    public Integer getVotes() {
+        return votes == null ? 0 : votes;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
+    }
+
     public static final class Builder {
+        private Integer votes;
         private String name;
         private int externalId;
         private String imageLink;
@@ -98,6 +111,10 @@ public class Movie {
         public Builder() {
         }
 
+        public Builder votes(int val) {
+            votes = val;
+            return this;
+        }
 
         public Builder name(String val) {
             name = val;
