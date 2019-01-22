@@ -1,37 +1,26 @@
-package filmclub.movie.database;
+package filmclub.movie;
 
-import com.google.common.base.Strings;
-import filmclub.application.HandledException;
+import filmclub.HandledException;
+import org.springframework.data.annotation.Id;
+import org.springframework.util.StringUtils;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-//We need @Table because when hibernate tries to create these tables, it will try to create a table called "Movie", however postgres is not case
-//sensitive, so it will create a table called "movie". Next time, hibernate will look for a table called "Movie", not find it, so will try to create
-//again. Postgres will complain, because it already has a table called "movie"
-@Entity
-@Table(name = "movie")
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
     @NotNull
     private String name;
 
-    @Column(nullable = false)
     @NotNull
     private int externalId;
 
-    @Column(nullable = false)
     @NotNull
     private String imageLink;
 
-    @Column
     private String imdbId;
 
-    @Column
     private Integer votes;
 
     public Movie(){}
@@ -81,8 +70,8 @@ public class Movie {
 
     private boolean valid() {
         return externalId > 0 &&
-                !Strings.isNullOrEmpty(name) &&
-                !Strings.isNullOrEmpty(imageLink);
+                !StringUtils.isEmpty(name) &&
+                !StringUtils.isEmpty(imageLink);
     }
 
     public String getImdbId() {
@@ -141,4 +130,3 @@ public class Movie {
         }
     }
 }
-
