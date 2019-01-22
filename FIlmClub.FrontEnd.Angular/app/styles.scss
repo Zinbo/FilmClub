@@ -2,3 +2,59 @@
 .testing {
   width: percentage(5/7);
 }
+
+#invalid-input {
+  border-left-color: salmon;
+}
+
+input.submitted.ng-invalid
+{
+  border:1px solid #f00;
+}
+
+.alert-fixed {
+    position:fixed; 
+    top: 0px; 
+    left: 0px; 
+    width: 100%;
+    z-index:9999; 
+    border-radius:0px
+}
+
+.panel{
+  color: black
+}
+
+.delete-button {
+  color: lightcoral; 
+}
+
+.delete-button:hover {
+  color: red !important;
+}
+
+.vote-up {
+  color: green;
+  opacity: .2;
+}
+
+.vote-up:hover {
+  opacity: 1;
+}
+
+.vote-down {
+  color: red;
+  opacity: .2;
+}
+
+.vote-down:hover {
+  opacity: 1;
+}
+
+.already-voted {
+  opacity: 1 !important;
+}
+
+.votes {
+  text-align: center;
+}

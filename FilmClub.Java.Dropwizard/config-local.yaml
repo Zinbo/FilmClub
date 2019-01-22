@@ -1,0 +1,13 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 9000
+  registerDefaultExceptionMappers: false
+
+spring:
+  profile: local
+  applicationContextClass: filmclub.application.SpringConfiguration
+
+theMovieDbProxy:
+  getMovieByIdUrl: https://api.themoviedb.org/3/movie/%d?api_key=c99917ae489bca2e3ad805c0ad92546b
+  getMoviesBySearchTermUrl: https://api.themoviedb.org/3/search/movie?api_key=c99917ae489bca2e3ad805c0ad92546b&query=%s

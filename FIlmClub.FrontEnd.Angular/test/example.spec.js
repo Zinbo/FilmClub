@@ -20,8 +20,8 @@
 //     });
 // });
 
-describe("NavController", function() {
-    it("says hello", function() {
+describe("NavController", function () {
+    it("says hello", function () {
         const hello = 'Hello World!';
         expect('Hello World!').toEqual(hello);
     });

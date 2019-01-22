@@ -1,3 +1,4 @@
+require('phantomjs-prebuilt').path = './node_modules/.bin/phantomjs'
 module.exports = function(config) {
     config.set({
         basePath: './',
@@ -10,6 +11,6 @@ module.exports = function(config) {
         browserify: {
             debug: true,
             transform: ['babelify']
-        }
+        },
     });
 };

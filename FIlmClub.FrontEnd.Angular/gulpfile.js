@@ -120,7 +120,7 @@ var tasks = {
 
         // determine if we're doing a build
         // and if so, bypass the livereload
-        var build = argv._.length ? argv._[0] === 'build' : false;
+        build = argv._.length ? argv._[0] === 'build' : false;
         if (watch) {
             bundler = watchify(bundler);
         }

@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +11,7 @@
     <title>Film Club</title>
 
     <!-- Bootstrap Core CSS -->
+    <link href="styles.css" rel="stylesheet">
     <link href="shared/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
@@ -22,9 +22,12 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css">
     <script src="bundle.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -41,6 +44,8 @@
 
     <navigation></navigation>
 
+    <alerts></alerts>
+
     <!-- Header -->
     <header>
         <div class="container" id="maincontent" tabindex="-1">
@@ -50,7 +55,7 @@
                     <div class="intro-text">
                         <h1 class="name">Film Club</h1>
                         <hr class="star-light">
-                        <span class="skills">An application to experiment with different frameworks and languages</span>
+                        <span class="skills">An application to experiment with different frameworks and languages {{greeting}}</span>
                     </div>
                 </div>
             </div>
@@ -74,21 +79,9 @@
         </div>
     </section>
 
-    <section class="success" id="movies">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Movies</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <p>Placeholder</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <view-movies></view-movies>
+
+    <add-movie></add-movie>
 
     <footer id="technologies" class="text-center">
         <div class="footer-above">
@@ -119,6 +112,7 @@
                         <i class="fa fa-star"></i> Angular 4?
                         <i class="fa fa-star"></i> React
                         <i class="fa fa-star"></i> Aurelia
+                        <i class="fa fa-star"></i> Vuejs
                     </div>
                     <div class="footer-col col-md-3">
                         <h3>UI</h3>

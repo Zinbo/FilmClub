@@ -1,9 +1,18 @@
 {
+    "plugins": [
+        "jasmine",
+        "protractor"
+    ],
+    "extends": [
+        "plugin:jasmine/recommended",
+        "plugin:protractor/recommended"
+    ],
     "env": {
         "browser": true,
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jasmine": true
     },
     "parserOptions": {
         "ecmaFeatures": {

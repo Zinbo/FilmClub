@@ -1,0 +1,43 @@
+<section class="success" id="movies">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Movies</h2>
+                <hr class="star-light">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <p ng-if="!moviesGroupedByRow || moviesGroupedByRow.length === 0">No movies found, why not try adding one?</p>
+                <div class="row" ng-if="moviesGroupedByRow && moviesGroupedByRow.length > 0" ng-repeat="moviesRow in moviesGroupedByRow">
+                    <div ng-repeat="movie in moviesRow" class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <button type="button" class="close" ng-click="$ctrl.openDeleteModal(movie)"><span aria-hidden="true">&times;</span></button>
+                                    <img ng-src="{{movie.imageLink}}" style="width:100%">
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div style="text-align: center;" class="col-md-12"> 
+                                            <a target="_blank" ng-if="movie.imdbId" ng-href="https://www.imdb.com/title/{{movie.imdbId}}/">{{movie.name}}</a>
+                                            <span ng-if="!movie.imdbId">{{movie.name}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <i ng-click="$ctrl.voteDown(movie)" ng-class="movie.alreadyDownVoted ? 'already-voted' : ''" class="vote-down fa fa-thumbs-o-down fa-2x"></i>
+                                            <i ng-click="$ctrl.voteUp(movie)" ng-class="movie.alreadyUpVoted ? 'already-voted' : ''" class="vote-up pull-right fa fa-thumbs-o-up fa-2x"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-md-12 votes">
+                                                {{movie.votes}}
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
